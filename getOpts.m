@@ -6,15 +6,20 @@ function [opt] = getOpts(expt_name)
 			opt = getDefaultOpts();
 		
 			opt.which_algs_paths = {'my_alg','baseline_alg'};
-			opt.Nimgs = 1000;
-			opt.ut_id = 'unset'; % set this using http://uniqueturker.myleott.com/
+            opt.Nimgs = 100;                        % number of images to test
+            opt.Npairs = 60;                        % number of paired comparisons per HIT
+            opt.Npractice = 10;                     % number of practice trials per HIT (number of non-practice trials is opt.Npairs-opt.Npractice)
+			opt.ut_id = '1951962b7f88dcf6924243f457202a77'; % set this using http://uniqueturker.myleott.com/
 			opt.base_url = 'https://www.mywebsite.com/example_expt_data/';
+        	opt.gt_path = 'gt';                     % path to gt images
 			opt.instructions_file = './instructions_basic.html';
 			opt.short_instructions_file = './short_instructions_basic.html';
 			opt.consent_file = './consent_basic.html';
 			opt.use_vigilance = false;
 			opt.paired = true;
-		
+            opt.vigilance_freq = 0.1;               % percent of trials that are vigilance tests
+            opt.use_vigilance = false;               % include vigilance trials (obviously fake images to check that Turkers are paying attention)	
+        	opt.paired = true;                      % if true, then fake/n.jpg will be pitted against real/n.jpg; if false, fake/n.jpg will be pitted against real/m.jpg, for random n and m
 		otherwise
 			error(sprintf('no opts defined for experiment %s',expt_name));
 	end
