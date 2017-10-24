@@ -139,12 +139,10 @@ function sequence_helper(gt_side,image_left,image_right) {
 	var curr_im = null;
 	p.gt_side.push(gt_side);
 	curr_im = new Image();
-	// curr_im.src = base_url + image_left + '.jpg';
-	curr_im.src = base_url + image_left + '.png';
+	curr_im.src = base_url + image_left + '.jpg';
 	p.images_left.push(curr_im);
 	curr_im = new Image();
-	// curr_im.src = base_url + image_right + '.jpg';
-	curr_im.src = base_url + image_right + '.png';
+	curr_im.src = base_url + image_right + '.jpg';
 	p.images_right.push(curr_im);
 }
 
@@ -439,7 +437,7 @@ function restartExperiment() {
 
     <div id="done" align = "center" style = "display:none"> 
         Thank you! You have completed the experiment.<br><br><div id="score"></div> 
-		<div><textarea id="comments" name="comments" rows="3" cols="31">Comments?</textarea></div><br>
+		<div><textarea id="comments" name="comments" rows="3" cols="31">Comments?</textarea></div><br><br>
 		Please click the submit button below to finish.
     </div>
 
