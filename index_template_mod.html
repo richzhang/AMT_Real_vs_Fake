@@ -88,13 +88,13 @@
 		</style>
 
 
-<script src="http://uniqueturker.myleott.com/lib.js" type="text/javascript"></script>
+<script src="//uniqueturker.myleott.com/lib.js" type="text/javascript"></script>
 <script type="text/javascript">
 (function(){
-    var ut_id = "{{UT_ID}}";
+    var ut_id = "d88297e141aa15cee9d225d4a38d58a2";
     if (UTWorkerLimitReached(ut_id)) {
         document.getElementById('mturk_form').style.display = 'none';
-        document.getElementsByTagName('body')[0].innerHTML = "You have already completed the maximum number of HITs allowed by this requester. Please click 'Return HIT'.";
+        document.getElementsByTagName('body')[0].innerHTML = "You have already completed the maximum number of HITs allowed by this requester. Please click 'Return HIT' to avoid any impact on your approval rating.";
     }
 })();
 </script>
@@ -265,9 +265,9 @@ function next() {
 	$('#imageRef_div').show();
 	$('#imageP1_div').show();
 
-	if(p.im_num == 0 || p.im_num == 10 || p.im_num == 100) {
-		getLocation()
-	}
+	// if(p.im_num == 0 || p.im_num == 10 || p.im_num == 100) {
+		// getLocation()
+	// }
 	// <button onclick="getLocation()">Try It</button>
 
 	if (p.is_practice) {
@@ -396,14 +396,14 @@ function restartExperiment() {
   <div id = "content_div">
 	<div id="images_div" style = "display:none" width = "100%" align = "center">
 	  <div id="short_instructions" style="display:none;"></div>
-      <div id="imageP0_div" style="height:258px; width:258px; display:inline-block; border:0px solid black;">
+      <div id="imageP0_div" style="height:288px; width:258px; display:inline-block; border:0px solid black;">
 		  <div id="feedbackP0" style="display:block; height: 30px"></div><img id="imageP0" style="display:block;" width="256px"/>
 		  <div id="buttonP0" style="position:relative; width:100%; height:100%"><button type="button" onclick="submitAnswer('left')" style="position:absolute; width:100%; height:20%; top:0; left:0; z-index: 10; font-size:14pt">Left</button></div>
 	  </div>
-	  <div id="imageRef_div" style="height:258px; width:258px; display:inline-block; border:0px solid black;">
+	  <div id="imageRef_div" style="height:288px; width:320px; display:inline-block; border:0px solid black;">
 		  <div id="feedbackB" style="display:block; height: 30px"]></div><img id="imageRef" style="display:block;" width="256px"/>
 	  </div>
-	  <div id="imageP1_div" style="height:258px; width:258px; display:inline-block; border:0px solid black;">
+	  <div id="imageP1_div" style="height:288px; width:258px; display:inline-block; border:0px solid black;">
 		  <div id="feedbackP1" style="display:block; height: 30px"]></div><img id="imageP1" style="display:block;" width="256px"/>
 		  <div id="buttonP1" style="position:relative; width:100%; height:20%"><button type="button" onclick="submitAnswer('right')" style="position:absolute; width:100%; height:100%; top:0; left:0; z-index: 10; font-size:14pt">Right</button></div>
 	  </div>
