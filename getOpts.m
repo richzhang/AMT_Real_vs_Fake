@@ -85,13 +85,13 @@ function [opt] = getOpts(expt_name)
 			opt = getDefaultOpts();
 			opt.which_algs_paths = {'p0','ref','p1'};
 %             opt.gt_path = 'ref';
-            opt.Nimgs = 10000;                        % number of images to test
+            opt.Nimgs = 20000;                        % number of images to test
 %             opt.Npairs = 810;                        % number of paired comparisons per HIT
-            opt.Npairs = 11;                        % number of paired comparisons per HIT
+            opt.Npairs = 520;                        % number of paired comparisons per HIT
             opt.Npractice = 10;                     % number of practice trials per HIT (number of non-practice trials is opt.Npairs-opt.Npractice)
 %             opt.Npairs = 10;                        % number of paired comparisons per HIT
 %             opt.Npractice = 5;                     % number of practice trials per HIT (number of non-practice trials is opt.Npairs-opt.Npractice)
-            opt.Nhits_per_alg = 25;                 % number of HITs
+            opt.Nhits_per_alg = 40;                 % number of HITs
 
             opt.ut_id = '9fb34d6b841e054b4035cb67409d4108'; % set this using http://uniqueturker.myleott.com/
 %             opt.ut_id = 'd88297e141aa15cee9d225d4a38d58a2';
@@ -106,7 +106,7 @@ function [opt] = getOpts(expt_name)
 			opt.vigilance_path = 'vigilance';
             opt.Nvigilance = 1000;                  % number of vigilance images available
 %         	opt.vigilance_freq = .1;               % percent of trials that are vigilance tests
-        	opt.vigilance_freq = .025;               % percent of trials that are vigilance tests
+        	opt.vigilance_freq = .04;               % percent of trials that are vigilance tests
             
             opt.im_height = 64;                    % dimensions at which to display the stimuli
             opt.im_width = 64;                     %
