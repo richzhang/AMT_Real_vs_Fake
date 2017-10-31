@@ -1,7 +1,6 @@
-function [] = mk_expt(expt_name)
-
+function [] = mk_expt(expt_name,subset,Nimgs,Nhits,Npairs,Npractice,vigilance_freq)
 %% expt parameters
-opt = getOpts(expt_name);
+opt = getOpts(expt_name,subset,Nimgs,Nhits,Npairs,Npractice,vigilance_freq);
 
 %% check parameters
 checkOpts(opt);
@@ -17,7 +16,8 @@ fprintf('Experiment name: %s\n',opt.expt_name)
 rng('shuffle');
 
 %%
-csv_fname = fullfile(opt.expt_name,sprintf('expt_input_data.csv'));
+% csv_fname = fullfile(opt.expt_name,sprintf('expt_input_data.csv'));
+csv_fname = fullfile(opt.expt_name,sprintf('%s.csv',opt.subset));
 
 images_p0 = {};
 images_ref = {};
@@ -73,13 +73,13 @@ for j=1:opt.Nhits_per_alg % number of hits
 
         if(vigilance_inds(i))
 %             fprintf('hello')
-            images_p0{j+1,i} = sprintf('%s/%s/%06d',opt.vigilance_path,'p0',vigilance_inds(i));
-            images_ref{j+1,i} = sprintf('%s/%s/%06d',opt.vigilance_path,'ref',vigilance_inds(i));
-            images_p1{j+1,i} = sprintf('%s/%s/%06d',opt.vigilance_path,'p1',vigilance_inds(i));
+            images_p0{j+1,i} = sprintf('%s/%s/%s/%06d',opt.subset,opt.vigilance_path,'p0',vigilance_inds(i));
+            images_ref{j+1,i} = sprintf('%s/%s/%s/%06d',opt.subset,opt.vigilance_path,'ref',vigilance_inds(i));
+            images_p1{j+1,i} = sprintf('%s/%s/%s/%06d',opt.subset,opt.vigilance_path,'p1',vigilance_inds(i));
         else
-            images_p0{j+1,i} = sprintf('%s/%06d','p0',which_imgs_alg(i));
-            images_ref{j+1,i} = sprintf('%s/%06d','ref',which_imgs_alg(i));
-            images_p1{j+1,i} = sprintf('%s/%06d','p1',which_imgs_alg(i));
+            images_p0{j+1,i} = sprintf('%s/%s/%06d',opt.subset,'p0',which_imgs_alg(i));
+            images_ref{j+1,i} = sprintf('%s/%s/%06d',opt.subset,'ref',which_imgs_alg(i));
+            images_p1{j+1,i} = sprintf('%s/%s/%06d',opt.subset,'p1',which_imgs_alg(i));
         end
     end
 end
