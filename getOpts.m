@@ -118,5 +118,5 @@ function [opt] = getOpts(expt_name,subset,Nimgs,Nhits,Npairs,Npractice,vigilance
 			error(sprintf('no opts defined for experiment %s',expt_name));
 	end
 	
-	opt.expt_name = strcat(expt_name,'_',subset);
+	opt.expt_name = strcat(expt_name,'/',subset);
 end
