@@ -51,6 +51,8 @@ for j=1:opt.Nhits_per_alg % number of hits
         vigil_inds_real = vigil_inds_real(1:Nvigil_real)+opt.Npractice;
         vigilance_inds(vigil_inds_real) = which_imgs_vig(Nvigil_practice+1:end); % put test image indices into vigilance
     end
+    
+    assert(sum(vigilance_inds(1:opt.Npractice)>0)==Nvigil_practice)
 
     % actual test images
 %     which_imgs_alg = randperm(opt.Nimgs)-1;
@@ -100,6 +102,15 @@ for i=1:size(A,1)
 end
 fclose(fid);
 
+%%
+is_vigil = zeros(opt.Nhits_per_alg,opt.Npractice);
+for ss=2:opt.Nhits_per_alg+1
+    for ii=1:opt.Npractice
+        is_vigil(ss-1,ii) = ~isempty(strfind(images_ref{ss,ii},opt.vigilance_path));
+    end
+end
+fprintf('Checking that there is 1 vigilance image in the first Npractice\n')
+assert(sum(sum(is_vigil,2)~=1)==0)
 
 %% html code generator
 html = fileread('index_template_mod.html');

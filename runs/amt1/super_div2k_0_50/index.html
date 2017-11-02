@@ -1,0 +1,1014 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html>
+	<head>
+		<link href="https://s3.amazonaws.com/mturk-public/bs30/css/bootstrap.min.css" rel="stylesheet" />
+		
+		<script src="https://s3.amazonaws.com/MTurks/jquery-1.11.2.min.js"></script>
+		<script src="https://s3.amazonaws.com/MTurks/jquery-ui.min.js"></script>
+		<script src="https://s3.amazonaws.com/MTurks/image-picker.min.js"></script>
+		
+				
+		<style>
+			body {
+				margin: 0px 50px;
+				font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+				font-size: 14pt;
+			}
+			
+			#content_div {
+				margin: auto;
+				width: 900px;
+			}
+			
+			h3 {
+			}
+			
+			#long_info {
+			}
+			
+			#couhes {
+				color: #777;
+				font-style: italic;
+				margin: 20px 0px;
+				font-size: 12pt;
+			}
+			
+			#start_button, #continue_button {
+				width:300px;
+				height:80px;
+				font-size:30px;
+				border: 2px solid #AAA;
+				border-radius: 25px;
+				background-color: #EEE;
+			}
+			#start_button:hover {
+				border: 2px solid #999;
+				background-color: #CCC;
+			}
+			
+			button, #submit_button {
+				width:200px;
+				height:50px;
+				font-size:24px;
+				border: 1px solid #CCC;
+				border-radius: 10px;
+				background-color: #EEE;
+			}
+			button:hover {
+				border: 1px solid #AAA;
+				background-color: #CCC;
+			}
+			
+			#images_div {
+				margin: 100px 0px 40px 0px;
+			}
+			
+			#trial_num {
+				margin: 20px 0px 0px 0px;
+				font-size:16px;
+				color:#777;
+				font-style:italic;
+			}
+			
+			#feedback {
+			}
+			
+			#experiment_start {
+				font-size: 20px;
+			}
+			
+			table.demo_imgs {
+				text-align: center;
+				font-size: 12pt;
+				margin-top: 20px;
+			}
+			table.demo_imgs td {
+				padding: 2px 10px 0px 10px;
+			}
+		</style>
+
+
+<script src="//uniqueturker.myleott.com/lib.js" type="text/javascript"></script>
+<script type="text/javascript">
+(function(){
+    var ut_id = "5b2626b3f00f88934f89858037008810";
+    if (UTWorkerLimitReached(ut_id)) {
+        document.getElementById('mturk_form').style.display = 'none';
+        document.getElementsByTagName('body')[0].innerHTML = "You have already completed the maximum number of HITs allowed by this requester. Please click 'Return HIT'. Thank you!";
+    }
+})();
+</script>
+
+<script type="text/javascript">
+
+// from http://stackoverflow.com/questions/15589764/how-to-hide-the-link-to-an-external-web-page-in-a-hit-before-workers-accept-the		
+$.extend({
+  getUrlVars: function(){
+    // From http://code.google.com/p/js-uri/source/browse/trunk/lib/URI.js
+    var parser = /^(?:([^:\/?\#]+):)?(?:\/\/([^\/?\#]*))?([^?\#]*)(?:\?([^\#]*))?(?:\#(.*))?/;
+    var result = window.location.href.match(parser);
+    var scheme    = result[1] || null;
+    var authority = result[2] || null;
+    var path      = result[3] || null;
+    var query     = result[4] || null;
+    var fragment  = result[5] || null
+    if (query === null || query === undefined) {
+      return {};
+    }
+    var vars = [], hash;
+    var hashes = query.split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+      hash = hashes[i].split('=');
+      vars.push(hash[0]);
+      vars[hash[0]] = hash[1];
+    }
+    return vars;
+  },
+  getUrlVar: function(name){
+    return $.getUrlVars()[name];
+  }
+});
+
+function setBodyHeight() {
+  var wh = $(window).height();
+  $('body').height(wh); // body height = window height
+}
+
+function sequence_helper(image_p0,image_ref,image_p1) {
+	var curr_im = null;
+
+	curr_im = new Image();
+	curr_im.src = base_url + image_p0 + '.png';
+	p.images_p0.push(curr_im);
+
+	curr_im = new Image();
+	curr_im.src = base_url + image_ref + '.png';
+	p.images_ref.push(curr_im);
+
+	curr_im = new Image();
+	curr_im.src = base_url + image_p1 + '.png';
+	p.images_p1.push(curr_im);
+}
+
+function makeExperiment() {
+    p.is_practice = false;
+	p.im_num = 0;
+    p.initialized = false;
+    p.is_assigned = ($.getUrlVar('assignmentId') != 'ASSIGNMENT_ID_NOT_AVAILABLE');
+    p.practice_intro_shown = false;
+    p.experiment_intro_shown = false;
+	p.npractice = 15;
+	p.total_num_ims = 265;
+	
+	p.gt_side = [];
+	p.images_p0 = [];
+	p.images_ref = [];
+	p.images_p1 = [];
+		
+	sequence_helper("${images_p0_1}","${images_ref_1}","${images_p1_1}");
+sequence_helper("${images_p0_2}","${images_ref_2}","${images_p1_2}");
+sequence_helper("${images_p0_3}","${images_ref_3}","${images_p1_3}");
+sequence_helper("${images_p0_4}","${images_ref_4}","${images_p1_4}");
+sequence_helper("${images_p0_5}","${images_ref_5}","${images_p1_5}");
+sequence_helper("${images_p0_6}","${images_ref_6}","${images_p1_6}");
+sequence_helper("${images_p0_7}","${images_ref_7}","${images_p1_7}");
+sequence_helper("${images_p0_8}","${images_ref_8}","${images_p1_8}");
+sequence_helper("${images_p0_9}","${images_ref_9}","${images_p1_9}");
+sequence_helper("${images_p0_10}","${images_ref_10}","${images_p1_10}");
+sequence_helper("${images_p0_11}","${images_ref_11}","${images_p1_11}");
+sequence_helper("${images_p0_12}","${images_ref_12}","${images_p1_12}");
+sequence_helper("${images_p0_13}","${images_ref_13}","${images_p1_13}");
+sequence_helper("${images_p0_14}","${images_ref_14}","${images_p1_14}");
+sequence_helper("${images_p0_15}","${images_ref_15}","${images_p1_15}");
+sequence_helper("${images_p0_16}","${images_ref_16}","${images_p1_16}");
+sequence_helper("${images_p0_17}","${images_ref_17}","${images_p1_17}");
+sequence_helper("${images_p0_18}","${images_ref_18}","${images_p1_18}");
+sequence_helper("${images_p0_19}","${images_ref_19}","${images_p1_19}");
+sequence_helper("${images_p0_20}","${images_ref_20}","${images_p1_20}");
+sequence_helper("${images_p0_21}","${images_ref_21}","${images_p1_21}");
+sequence_helper("${images_p0_22}","${images_ref_22}","${images_p1_22}");
+sequence_helper("${images_p0_23}","${images_ref_23}","${images_p1_23}");
+sequence_helper("${images_p0_24}","${images_ref_24}","${images_p1_24}");
+sequence_helper("${images_p0_25}","${images_ref_25}","${images_p1_25}");
+sequence_helper("${images_p0_26}","${images_ref_26}","${images_p1_26}");
+sequence_helper("${images_p0_27}","${images_ref_27}","${images_p1_27}");
+sequence_helper("${images_p0_28}","${images_ref_28}","${images_p1_28}");
+sequence_helper("${images_p0_29}","${images_ref_29}","${images_p1_29}");
+sequence_helper("${images_p0_30}","${images_ref_30}","${images_p1_30}");
+sequence_helper("${images_p0_31}","${images_ref_31}","${images_p1_31}");
+sequence_helper("${images_p0_32}","${images_ref_32}","${images_p1_32}");
+sequence_helper("${images_p0_33}","${images_ref_33}","${images_p1_33}");
+sequence_helper("${images_p0_34}","${images_ref_34}","${images_p1_34}");
+sequence_helper("${images_p0_35}","${images_ref_35}","${images_p1_35}");
+sequence_helper("${images_p0_36}","${images_ref_36}","${images_p1_36}");
+sequence_helper("${images_p0_37}","${images_ref_37}","${images_p1_37}");
+sequence_helper("${images_p0_38}","${images_ref_38}","${images_p1_38}");
+sequence_helper("${images_p0_39}","${images_ref_39}","${images_p1_39}");
+sequence_helper("${images_p0_40}","${images_ref_40}","${images_p1_40}");
+sequence_helper("${images_p0_41}","${images_ref_41}","${images_p1_41}");
+sequence_helper("${images_p0_42}","${images_ref_42}","${images_p1_42}");
+sequence_helper("${images_p0_43}","${images_ref_43}","${images_p1_43}");
+sequence_helper("${images_p0_44}","${images_ref_44}","${images_p1_44}");
+sequence_helper("${images_p0_45}","${images_ref_45}","${images_p1_45}");
+sequence_helper("${images_p0_46}","${images_ref_46}","${images_p1_46}");
+sequence_helper("${images_p0_47}","${images_ref_47}","${images_p1_47}");
+sequence_helper("${images_p0_48}","${images_ref_48}","${images_p1_48}");
+sequence_helper("${images_p0_49}","${images_ref_49}","${images_p1_49}");
+sequence_helper("${images_p0_50}","${images_ref_50}","${images_p1_50}");
+sequence_helper("${images_p0_51}","${images_ref_51}","${images_p1_51}");
+sequence_helper("${images_p0_52}","${images_ref_52}","${images_p1_52}");
+sequence_helper("${images_p0_53}","${images_ref_53}","${images_p1_53}");
+sequence_helper("${images_p0_54}","${images_ref_54}","${images_p1_54}");
+sequence_helper("${images_p0_55}","${images_ref_55}","${images_p1_55}");
+sequence_helper("${images_p0_56}","${images_ref_56}","${images_p1_56}");
+sequence_helper("${images_p0_57}","${images_ref_57}","${images_p1_57}");
+sequence_helper("${images_p0_58}","${images_ref_58}","${images_p1_58}");
+sequence_helper("${images_p0_59}","${images_ref_59}","${images_p1_59}");
+sequence_helper("${images_p0_60}","${images_ref_60}","${images_p1_60}");
+sequence_helper("${images_p0_61}","${images_ref_61}","${images_p1_61}");
+sequence_helper("${images_p0_62}","${images_ref_62}","${images_p1_62}");
+sequence_helper("${images_p0_63}","${images_ref_63}","${images_p1_63}");
+sequence_helper("${images_p0_64}","${images_ref_64}","${images_p1_64}");
+sequence_helper("${images_p0_65}","${images_ref_65}","${images_p1_65}");
+sequence_helper("${images_p0_66}","${images_ref_66}","${images_p1_66}");
+sequence_helper("${images_p0_67}","${images_ref_67}","${images_p1_67}");
+sequence_helper("${images_p0_68}","${images_ref_68}","${images_p1_68}");
+sequence_helper("${images_p0_69}","${images_ref_69}","${images_p1_69}");
+sequence_helper("${images_p0_70}","${images_ref_70}","${images_p1_70}");
+sequence_helper("${images_p0_71}","${images_ref_71}","${images_p1_71}");
+sequence_helper("${images_p0_72}","${images_ref_72}","${images_p1_72}");
+sequence_helper("${images_p0_73}","${images_ref_73}","${images_p1_73}");
+sequence_helper("${images_p0_74}","${images_ref_74}","${images_p1_74}");
+sequence_helper("${images_p0_75}","${images_ref_75}","${images_p1_75}");
+sequence_helper("${images_p0_76}","${images_ref_76}","${images_p1_76}");
+sequence_helper("${images_p0_77}","${images_ref_77}","${images_p1_77}");
+sequence_helper("${images_p0_78}","${images_ref_78}","${images_p1_78}");
+sequence_helper("${images_p0_79}","${images_ref_79}","${images_p1_79}");
+sequence_helper("${images_p0_80}","${images_ref_80}","${images_p1_80}");
+sequence_helper("${images_p0_81}","${images_ref_81}","${images_p1_81}");
+sequence_helper("${images_p0_82}","${images_ref_82}","${images_p1_82}");
+sequence_helper("${images_p0_83}","${images_ref_83}","${images_p1_83}");
+sequence_helper("${images_p0_84}","${images_ref_84}","${images_p1_84}");
+sequence_helper("${images_p0_85}","${images_ref_85}","${images_p1_85}");
+sequence_helper("${images_p0_86}","${images_ref_86}","${images_p1_86}");
+sequence_helper("${images_p0_87}","${images_ref_87}","${images_p1_87}");
+sequence_helper("${images_p0_88}","${images_ref_88}","${images_p1_88}");
+sequence_helper("${images_p0_89}","${images_ref_89}","${images_p1_89}");
+sequence_helper("${images_p0_90}","${images_ref_90}","${images_p1_90}");
+sequence_helper("${images_p0_91}","${images_ref_91}","${images_p1_91}");
+sequence_helper("${images_p0_92}","${images_ref_92}","${images_p1_92}");
+sequence_helper("${images_p0_93}","${images_ref_93}","${images_p1_93}");
+sequence_helper("${images_p0_94}","${images_ref_94}","${images_p1_94}");
+sequence_helper("${images_p0_95}","${images_ref_95}","${images_p1_95}");
+sequence_helper("${images_p0_96}","${images_ref_96}","${images_p1_96}");
+sequence_helper("${images_p0_97}","${images_ref_97}","${images_p1_97}");
+sequence_helper("${images_p0_98}","${images_ref_98}","${images_p1_98}");
+sequence_helper("${images_p0_99}","${images_ref_99}","${images_p1_99}");
+sequence_helper("${images_p0_100}","${images_ref_100}","${images_p1_100}");
+sequence_helper("${images_p0_101}","${images_ref_101}","${images_p1_101}");
+sequence_helper("${images_p0_102}","${images_ref_102}","${images_p1_102}");
+sequence_helper("${images_p0_103}","${images_ref_103}","${images_p1_103}");
+sequence_helper("${images_p0_104}","${images_ref_104}","${images_p1_104}");
+sequence_helper("${images_p0_105}","${images_ref_105}","${images_p1_105}");
+sequence_helper("${images_p0_106}","${images_ref_106}","${images_p1_106}");
+sequence_helper("${images_p0_107}","${images_ref_107}","${images_p1_107}");
+sequence_helper("${images_p0_108}","${images_ref_108}","${images_p1_108}");
+sequence_helper("${images_p0_109}","${images_ref_109}","${images_p1_109}");
+sequence_helper("${images_p0_110}","${images_ref_110}","${images_p1_110}");
+sequence_helper("${images_p0_111}","${images_ref_111}","${images_p1_111}");
+sequence_helper("${images_p0_112}","${images_ref_112}","${images_p1_112}");
+sequence_helper("${images_p0_113}","${images_ref_113}","${images_p1_113}");
+sequence_helper("${images_p0_114}","${images_ref_114}","${images_p1_114}");
+sequence_helper("${images_p0_115}","${images_ref_115}","${images_p1_115}");
+sequence_helper("${images_p0_116}","${images_ref_116}","${images_p1_116}");
+sequence_helper("${images_p0_117}","${images_ref_117}","${images_p1_117}");
+sequence_helper("${images_p0_118}","${images_ref_118}","${images_p1_118}");
+sequence_helper("${images_p0_119}","${images_ref_119}","${images_p1_119}");
+sequence_helper("${images_p0_120}","${images_ref_120}","${images_p1_120}");
+sequence_helper("${images_p0_121}","${images_ref_121}","${images_p1_121}");
+sequence_helper("${images_p0_122}","${images_ref_122}","${images_p1_122}");
+sequence_helper("${images_p0_123}","${images_ref_123}","${images_p1_123}");
+sequence_helper("${images_p0_124}","${images_ref_124}","${images_p1_124}");
+sequence_helper("${images_p0_125}","${images_ref_125}","${images_p1_125}");
+sequence_helper("${images_p0_126}","${images_ref_126}","${images_p1_126}");
+sequence_helper("${images_p0_127}","${images_ref_127}","${images_p1_127}");
+sequence_helper("${images_p0_128}","${images_ref_128}","${images_p1_128}");
+sequence_helper("${images_p0_129}","${images_ref_129}","${images_p1_129}");
+sequence_helper("${images_p0_130}","${images_ref_130}","${images_p1_130}");
+sequence_helper("${images_p0_131}","${images_ref_131}","${images_p1_131}");
+sequence_helper("${images_p0_132}","${images_ref_132}","${images_p1_132}");
+sequence_helper("${images_p0_133}","${images_ref_133}","${images_p1_133}");
+sequence_helper("${images_p0_134}","${images_ref_134}","${images_p1_134}");
+sequence_helper("${images_p0_135}","${images_ref_135}","${images_p1_135}");
+sequence_helper("${images_p0_136}","${images_ref_136}","${images_p1_136}");
+sequence_helper("${images_p0_137}","${images_ref_137}","${images_p1_137}");
+sequence_helper("${images_p0_138}","${images_ref_138}","${images_p1_138}");
+sequence_helper("${images_p0_139}","${images_ref_139}","${images_p1_139}");
+sequence_helper("${images_p0_140}","${images_ref_140}","${images_p1_140}");
+sequence_helper("${images_p0_141}","${images_ref_141}","${images_p1_141}");
+sequence_helper("${images_p0_142}","${images_ref_142}","${images_p1_142}");
+sequence_helper("${images_p0_143}","${images_ref_143}","${images_p1_143}");
+sequence_helper("${images_p0_144}","${images_ref_144}","${images_p1_144}");
+sequence_helper("${images_p0_145}","${images_ref_145}","${images_p1_145}");
+sequence_helper("${images_p0_146}","${images_ref_146}","${images_p1_146}");
+sequence_helper("${images_p0_147}","${images_ref_147}","${images_p1_147}");
+sequence_helper("${images_p0_148}","${images_ref_148}","${images_p1_148}");
+sequence_helper("${images_p0_149}","${images_ref_149}","${images_p1_149}");
+sequence_helper("${images_p0_150}","${images_ref_150}","${images_p1_150}");
+sequence_helper("${images_p0_151}","${images_ref_151}","${images_p1_151}");
+sequence_helper("${images_p0_152}","${images_ref_152}","${images_p1_152}");
+sequence_helper("${images_p0_153}","${images_ref_153}","${images_p1_153}");
+sequence_helper("${images_p0_154}","${images_ref_154}","${images_p1_154}");
+sequence_helper("${images_p0_155}","${images_ref_155}","${images_p1_155}");
+sequence_helper("${images_p0_156}","${images_ref_156}","${images_p1_156}");
+sequence_helper("${images_p0_157}","${images_ref_157}","${images_p1_157}");
+sequence_helper("${images_p0_158}","${images_ref_158}","${images_p1_158}");
+sequence_helper("${images_p0_159}","${images_ref_159}","${images_p1_159}");
+sequence_helper("${images_p0_160}","${images_ref_160}","${images_p1_160}");
+sequence_helper("${images_p0_161}","${images_ref_161}","${images_p1_161}");
+sequence_helper("${images_p0_162}","${images_ref_162}","${images_p1_162}");
+sequence_helper("${images_p0_163}","${images_ref_163}","${images_p1_163}");
+sequence_helper("${images_p0_164}","${images_ref_164}","${images_p1_164}");
+sequence_helper("${images_p0_165}","${images_ref_165}","${images_p1_165}");
+sequence_helper("${images_p0_166}","${images_ref_166}","${images_p1_166}");
+sequence_helper("${images_p0_167}","${images_ref_167}","${images_p1_167}");
+sequence_helper("${images_p0_168}","${images_ref_168}","${images_p1_168}");
+sequence_helper("${images_p0_169}","${images_ref_169}","${images_p1_169}");
+sequence_helper("${images_p0_170}","${images_ref_170}","${images_p1_170}");
+sequence_helper("${images_p0_171}","${images_ref_171}","${images_p1_171}");
+sequence_helper("${images_p0_172}","${images_ref_172}","${images_p1_172}");
+sequence_helper("${images_p0_173}","${images_ref_173}","${images_p1_173}");
+sequence_helper("${images_p0_174}","${images_ref_174}","${images_p1_174}");
+sequence_helper("${images_p0_175}","${images_ref_175}","${images_p1_175}");
+sequence_helper("${images_p0_176}","${images_ref_176}","${images_p1_176}");
+sequence_helper("${images_p0_177}","${images_ref_177}","${images_p1_177}");
+sequence_helper("${images_p0_178}","${images_ref_178}","${images_p1_178}");
+sequence_helper("${images_p0_179}","${images_ref_179}","${images_p1_179}");
+sequence_helper("${images_p0_180}","${images_ref_180}","${images_p1_180}");
+sequence_helper("${images_p0_181}","${images_ref_181}","${images_p1_181}");
+sequence_helper("${images_p0_182}","${images_ref_182}","${images_p1_182}");
+sequence_helper("${images_p0_183}","${images_ref_183}","${images_p1_183}");
+sequence_helper("${images_p0_184}","${images_ref_184}","${images_p1_184}");
+sequence_helper("${images_p0_185}","${images_ref_185}","${images_p1_185}");
+sequence_helper("${images_p0_186}","${images_ref_186}","${images_p1_186}");
+sequence_helper("${images_p0_187}","${images_ref_187}","${images_p1_187}");
+sequence_helper("${images_p0_188}","${images_ref_188}","${images_p1_188}");
+sequence_helper("${images_p0_189}","${images_ref_189}","${images_p1_189}");
+sequence_helper("${images_p0_190}","${images_ref_190}","${images_p1_190}");
+sequence_helper("${images_p0_191}","${images_ref_191}","${images_p1_191}");
+sequence_helper("${images_p0_192}","${images_ref_192}","${images_p1_192}");
+sequence_helper("${images_p0_193}","${images_ref_193}","${images_p1_193}");
+sequence_helper("${images_p0_194}","${images_ref_194}","${images_p1_194}");
+sequence_helper("${images_p0_195}","${images_ref_195}","${images_p1_195}");
+sequence_helper("${images_p0_196}","${images_ref_196}","${images_p1_196}");
+sequence_helper("${images_p0_197}","${images_ref_197}","${images_p1_197}");
+sequence_helper("${images_p0_198}","${images_ref_198}","${images_p1_198}");
+sequence_helper("${images_p0_199}","${images_ref_199}","${images_p1_199}");
+sequence_helper("${images_p0_200}","${images_ref_200}","${images_p1_200}");
+sequence_helper("${images_p0_201}","${images_ref_201}","${images_p1_201}");
+sequence_helper("${images_p0_202}","${images_ref_202}","${images_p1_202}");
+sequence_helper("${images_p0_203}","${images_ref_203}","${images_p1_203}");
+sequence_helper("${images_p0_204}","${images_ref_204}","${images_p1_204}");
+sequence_helper("${images_p0_205}","${images_ref_205}","${images_p1_205}");
+sequence_helper("${images_p0_206}","${images_ref_206}","${images_p1_206}");
+sequence_helper("${images_p0_207}","${images_ref_207}","${images_p1_207}");
+sequence_helper("${images_p0_208}","${images_ref_208}","${images_p1_208}");
+sequence_helper("${images_p0_209}","${images_ref_209}","${images_p1_209}");
+sequence_helper("${images_p0_210}","${images_ref_210}","${images_p1_210}");
+sequence_helper("${images_p0_211}","${images_ref_211}","${images_p1_211}");
+sequence_helper("${images_p0_212}","${images_ref_212}","${images_p1_212}");
+sequence_helper("${images_p0_213}","${images_ref_213}","${images_p1_213}");
+sequence_helper("${images_p0_214}","${images_ref_214}","${images_p1_214}");
+sequence_helper("${images_p0_215}","${images_ref_215}","${images_p1_215}");
+sequence_helper("${images_p0_216}","${images_ref_216}","${images_p1_216}");
+sequence_helper("${images_p0_217}","${images_ref_217}","${images_p1_217}");
+sequence_helper("${images_p0_218}","${images_ref_218}","${images_p1_218}");
+sequence_helper("${images_p0_219}","${images_ref_219}","${images_p1_219}");
+sequence_helper("${images_p0_220}","${images_ref_220}","${images_p1_220}");
+sequence_helper("${images_p0_221}","${images_ref_221}","${images_p1_221}");
+sequence_helper("${images_p0_222}","${images_ref_222}","${images_p1_222}");
+sequence_helper("${images_p0_223}","${images_ref_223}","${images_p1_223}");
+sequence_helper("${images_p0_224}","${images_ref_224}","${images_p1_224}");
+sequence_helper("${images_p0_225}","${images_ref_225}","${images_p1_225}");
+sequence_helper("${images_p0_226}","${images_ref_226}","${images_p1_226}");
+sequence_helper("${images_p0_227}","${images_ref_227}","${images_p1_227}");
+sequence_helper("${images_p0_228}","${images_ref_228}","${images_p1_228}");
+sequence_helper("${images_p0_229}","${images_ref_229}","${images_p1_229}");
+sequence_helper("${images_p0_230}","${images_ref_230}","${images_p1_230}");
+sequence_helper("${images_p0_231}","${images_ref_231}","${images_p1_231}");
+sequence_helper("${images_p0_232}","${images_ref_232}","${images_p1_232}");
+sequence_helper("${images_p0_233}","${images_ref_233}","${images_p1_233}");
+sequence_helper("${images_p0_234}","${images_ref_234}","${images_p1_234}");
+sequence_helper("${images_p0_235}","${images_ref_235}","${images_p1_235}");
+sequence_helper("${images_p0_236}","${images_ref_236}","${images_p1_236}");
+sequence_helper("${images_p0_237}","${images_ref_237}","${images_p1_237}");
+sequence_helper("${images_p0_238}","${images_ref_238}","${images_p1_238}");
+sequence_helper("${images_p0_239}","${images_ref_239}","${images_p1_239}");
+sequence_helper("${images_p0_240}","${images_ref_240}","${images_p1_240}");
+sequence_helper("${images_p0_241}","${images_ref_241}","${images_p1_241}");
+sequence_helper("${images_p0_242}","${images_ref_242}","${images_p1_242}");
+sequence_helper("${images_p0_243}","${images_ref_243}","${images_p1_243}");
+sequence_helper("${images_p0_244}","${images_ref_244}","${images_p1_244}");
+sequence_helper("${images_p0_245}","${images_ref_245}","${images_p1_245}");
+sequence_helper("${images_p0_246}","${images_ref_246}","${images_p1_246}");
+sequence_helper("${images_p0_247}","${images_ref_247}","${images_p1_247}");
+sequence_helper("${images_p0_248}","${images_ref_248}","${images_p1_248}");
+sequence_helper("${images_p0_249}","${images_ref_249}","${images_p1_249}");
+sequence_helper("${images_p0_250}","${images_ref_250}","${images_p1_250}");
+sequence_helper("${images_p0_251}","${images_ref_251}","${images_p1_251}");
+sequence_helper("${images_p0_252}","${images_ref_252}","${images_p1_252}");
+sequence_helper("${images_p0_253}","${images_ref_253}","${images_p1_253}");
+sequence_helper("${images_p0_254}","${images_ref_254}","${images_p1_254}");
+sequence_helper("${images_p0_255}","${images_ref_255}","${images_p1_255}");
+sequence_helper("${images_p0_256}","${images_ref_256}","${images_p1_256}");
+sequence_helper("${images_p0_257}","${images_ref_257}","${images_p1_257}");
+sequence_helper("${images_p0_258}","${images_ref_258}","${images_p1_258}");
+sequence_helper("${images_p0_259}","${images_ref_259}","${images_p1_259}");
+sequence_helper("${images_p0_260}","${images_ref_260}","${images_p1_260}");
+sequence_helper("${images_p0_261}","${images_ref_261}","${images_p1_261}");
+sequence_helper("${images_p0_262}","${images_ref_262}","${images_p1_262}");
+sequence_helper("${images_p0_263}","${images_ref_263}","${images_p1_263}");
+sequence_helper("${images_p0_264}","${images_ref_264}","${images_p1_264}");
+sequence_helper("${images_p0_265}","${images_ref_265}","${images_p1_265}");
+
+		
+    return this;
+}
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+	$("#lat").val(position.coords.latitude);
+	$("#lon").val(position.coords.longitude);
+}
+
+
+var p = {};
+var base_url = 'http://colorization.eecs.berkeley.edu/_tmp_host/2017_09_perceptual/amt1/';
+var first_trial = true;
+var num_correct = 0;
+
+function assert(x, msg) { if (!x) { throw("Assertion failed: " + msg); } }
+
+function now() { return (new Date()).getTime() / 1000.; }
+
+function end() {
+	$("#submitButton").show();
+    $('#short_instructions').hide();
+	// $('#score').html("You got " + (Math.round(100*(num_correct/(p.total_num_ims-p.npractice)))) + "% correct.<br><br>");
+	// $('#name').show();
+    $('#done').show();
+}
+
+function showFixation() {
+    document.im.src = p.fixation_im.src;
+}
+function showBlank() {
+    document.im.src = "images/start_image.png";
+}
+
+function continue_to_main_expt() {
+	$('#experiment_start').hide();
+	next();
+}
+
+function next() {
+	
+	// $('#feedbackP0').html('');
+	// $('#feedbackB').html('');
+	// $('#feedbackP1').html('');
+	
+	$('#imageP0').css('border','1px solid black');
+	$('#imageRef').css('border','1px solid black');
+	$('#imageP1').css('border','1px solid black');
+	
+    if (p.is_practice && (p.im_num == p.npractice)) { // end of practice
+		p.is_practice = false;
+		
+    	$('#feedback').hide();	
+
+    	$('#imageP0').hide();
+    	$('#imageRef').hide();
+    	$('#imageP1').hide();
+
+    	$('#imageP0_div').hide();
+    	$('#imageRef_div').hide();
+    	$('#imageP1_div').hide();
+
+    	$('#short_instructions').html("");
+       
+    	$('#experiment_start').show();
+    	
+    	return;
+    }
+	else if (p.im_num == p.total_num_ims) {
+		
+		end();
+		
+		return;
+	}
+
+	var display_time = 1000;
+	var fade_time = 200;
+	var isi = 300;
+	
+	var offset_time = 0;
+	
+    $('#feedback').hide();	
+
+	// $('#short_instructions').html("");
+	$('#short_instructions').show();
+
+	$('#imageP0_div').show();
+	$('#imageRef_div').show();
+	$('#imageP1_div').show();
+
+	// if(p.im_num == 0 || p.im_num == 10 || p.im_num == 100) {
+		// getLocation()
+	// }
+	// <button onclick="getLocation()">Try It</button>
+
+	if (p.is_practice) {
+		$('#trial_num').html("<br><center>Practice trial " + (p.im_num+1) + " out of " + p.npractice + "</center>");
+	}
+	else {
+		$('#trial_num').html("<br><center>Trial " + (p.im_num+1-p.npractice) + " out of " + (p.total_num_ims-p.npractice) + "</center>");
+	}
+
+	if (first_trial) {
+		offset_time += isi;
+		first_trial = false;
+	}
+	
+	var imageP0 = document.getElementById('imageP0');
+	imageP0.src = p.images_p0[p.im_num].src;
+
+	var imageRef = document.getElementById('imageRef');
+	imageRef.src = p.images_ref[p.im_num].src;
+
+	var imageP1 = document.getElementById('imageP1');
+	imageP1.src = p.images_p1[p.im_num].src;
+	
+	$('#imageP0').show()
+	$('#imageRef').show()
+	$('#imageP1').show()
+	
+	fade_time = 0;
+	setTimeout(function() { 
+		$('#trial_num').show(); 
+		$('#short_instructions').html("Which is more similar to the <b>middle reference image</b>? <br> Some of these may be obvious, but others may be more difficult. In the difficult cases, give your best guess.");
+		$('#buttonP0').fadeIn(fade_time);
+		// $('#buttonRef').fadeIn(fade_time);
+		$('#buttonP1').fadeIn(fade_time);
+	}, offset_time+100);
+}
+
+function submitAnswer(answer) {
+	
+	$('#buttonP0').hide();
+	// $('#buttonRef').hide();
+	$('#buttonP1').hide();
+	$('#trial_num').hide();
+
+	if (answer=='left') {
+	   	$('#imageP0').css('border','6px solid green');
+	}
+   	else {
+   		$('#imageP1').css('border','6px solid green');
+   	}
+
+	$("#selection"+(p.im_num+1)).val(answer);
+	p.im_num = p.im_num+1;
+
+	if (p.is_practice) {
+   		$('#imageP0').show();
+   		$('#imageRef').show();
+   		$('#imageP1').show();
+   		$('#imageP0_div').show();
+   		$('#imageRef_div').show();
+   		$('#imageP1_div').show();
+		
+		setTimeout(function() { next(); }, 500);
+	}
+	else {
+   		$('#imageP0').show();
+   		$('#imageRef').show();
+   		$('#imageP1').show();
+   		$('#imageP0_div').show();
+   		$('#imageRef_div').show();
+   		$('#imageP1_div').show();
+		
+		setTimeout(function() { next(); }, 500);
+	}
+}
+
+function startExperiment() {
+
+    if (p == null) {
+        return;
+    }
+    
+    p.is_practice = true;
+	
+    $('#buttons_start').hide();
+    $('#long_info').hide();
+    $('#couhes').hide();
+    $('#teaser').hide();
+
+    $('#images_div').show();
+
+    next();
+}
+
+
+function init() {
+	
+	$(window).bind('resize', function() { setBodyHeight(); });
+	
+	makeExperiment();
+
+	$("#submitButton").hide();
+	$('#imageP0').hide();
+	$('#imageRef').hide();
+	$('#imageP1').hide();
+	$('#buttonP0').hide();
+	$('#buttonP1').hide();
+	
+	if (p.is_assigned) {
+		$('#start_button').removeAttr('disabled');
+		$('#start_button').html('Start!');
+	}
+}
+
+$(document).ready(init);
+
+function restartExperiment() {
+}
+
+</script>
+    
+  </head>
+
+
+  <body>
+  <div id = "content_div">
+	<div id="images_div" style = "display:none" width = "100%" align = "center">
+	  <div id="short_instructions" style="display:none;"></div>
+      <div id="imageP0_div" style="height:288px; width:258px; display:inline-block; border:0px solid black;">
+		  <div id="feedbackP0" style="display:block; height: 30px"></div><img id="imageP0" style="display:block;" width="256px"/>
+		  <div id="buttonP0" style="position:relative; width:100%; height:100%"><button type="button" onclick="submitAnswer('left')" style="position:absolute; width:100%; height:20%; top:0; left:0; z-index: 10; font-size:14pt">Left</button></div>
+	  </div>
+	  <div id="imageRef_div" style="height:288px; width:320px; display:inline-block; border:0px solid black;">
+		  <div id="feedbackB" style="display:block; height: 30px"]></div><img id="imageRef" style="display:block;" width="256px"/>
+	  </div>
+	  <div id="imageP1_div" style="height:288px; width:258px; display:inline-block; border:0px solid black;">
+		  <div id="feedbackP1" style="display:block; height: 30px"]></div><img id="imageP1" style="display:block;" width="256px"/>
+		  <div id="buttonP1" style="position:relative; width:100%; height:20%"><button type="button" onclick="submitAnswer('right')" style="position:absolute; width:100%; height:100%; top:0; left:0; z-index: 10; font-size:14pt">Right</button></div>
+	  </div>
+    </div>
+
+    <div id= "feedback" align=center style="display:none"></div>
+	
+    <div id = "experiment_start" style="width: 800px; margin: 0 auto; text-align: left; display:none">
+      <br>You've completed the practice exercise!  Click "Continue" to continue on to the main task. The main task will be identical.</br>
+	  <div id = "buttons_continue" align=center>
+		  <button id="continue_button" type="button" onClick="continue_to_main_expt()">Continue!</button>
+	  </div>
+    </div>
+	
+	<div id="trial_num" style="display:none"></div>
+    
+    <div id="short_info" align="center" style="width: 80%; margin: 0 auto; text-align: left; display:none" align = center>
+    </div>
+
+    <br>
+    <br>
+    
+    
+    <div id="long_info" style = "width:100%">
+        <b>About this HIT:</b><br><br>
+<ul>
+    <li><b>Please only participate in this HIT if you have normal color vision.</b></li><br>
+
+    <li>It should take about 15 minutes.</li><br>
+
+    <li>You will take part in an experiment involving visual perception. You will be given 3 images - a reference image in the middle and two images on the sides. Your task it to determine which of the two images - left or right - looks closer to the one in the middle. Some of these may be obvious, but others may be more difficult. In the difficult cases, give your best guess. </li>
+    
+    <li>You will complete a short practice (less than 1 minute) before starting the main task.</li>
+</ul>
+    </div>
+
+    
+	  <div id = "buttons_start" align=center>
+      	<br>
+      	<button id="start_button" type="button" onClick="startExperiment()" disabled=true><span style='font-size:16pt'>Please accept HIT to start</span></button>
+		
+      	<div id = "not_assigned" align=left style = "display:none">
+      		<p>Please accept the HIT to begin!</p>
+      	</div>
+	  </div>
+
+    <div id="name" align = "center" style = "display:none"> 
+        <div><textarea id="name" name="name" rows="1" cols="31">Name (optional)</textarea></div>
+    </div>
+
+    <div id="done" align = "center" style = "display:none"> 
+        Thank you! You have completed the experiment.
+        <!-- <br><br><div id="score"></div>  -->
+		<div><textarea id="comments" name="comments" rows="3" cols="31">Comments?</textarea></div>
+		Please click the submit button below to finish.
+    </div>
+
+    <div id="couhes">
+      <br>
+      <span id="informed_consent_text">By making judgments about these images, you are participating in a study being performed by scientists at University of California, Berkeley and Adobe Research. If you have questions about this research, please contact Richard Zhang at rich.zhang@eecs.berkeley.edu. Your participation in this research is voluntary. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.</span>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+  </div>
+  
+<input type="hidden" name="selection1" id="selection1" value="unset">
+<input type="hidden" name="selection2" id="selection2" value="unset">
+<input type="hidden" name="selection3" id="selection3" value="unset">
+<input type="hidden" name="selection4" id="selection4" value="unset">
+<input type="hidden" name="selection5" id="selection5" value="unset">
+<input type="hidden" name="selection6" id="selection6" value="unset">
+<input type="hidden" name="selection7" id="selection7" value="unset">
+<input type="hidden" name="selection8" id="selection8" value="unset">
+<input type="hidden" name="selection9" id="selection9" value="unset">
+<input type="hidden" name="selection10" id="selection10" value="unset">
+<input type="hidden" name="selection11" id="selection11" value="unset">
+<input type="hidden" name="selection12" id="selection12" value="unset">
+<input type="hidden" name="selection13" id="selection13" value="unset">
+<input type="hidden" name="selection14" id="selection14" value="unset">
+<input type="hidden" name="selection15" id="selection15" value="unset">
+<input type="hidden" name="selection16" id="selection16" value="unset">
+<input type="hidden" name="selection17" id="selection17" value="unset">
+<input type="hidden" name="selection18" id="selection18" value="unset">
+<input type="hidden" name="selection19" id="selection19" value="unset">
+<input type="hidden" name="selection20" id="selection20" value="unset">
+<input type="hidden" name="selection21" id="selection21" value="unset">
+<input type="hidden" name="selection22" id="selection22" value="unset">
+<input type="hidden" name="selection23" id="selection23" value="unset">
+<input type="hidden" name="selection24" id="selection24" value="unset">
+<input type="hidden" name="selection25" id="selection25" value="unset">
+<input type="hidden" name="selection26" id="selection26" value="unset">
+<input type="hidden" name="selection27" id="selection27" value="unset">
+<input type="hidden" name="selection28" id="selection28" value="unset">
+<input type="hidden" name="selection29" id="selection29" value="unset">
+<input type="hidden" name="selection30" id="selection30" value="unset">
+<input type="hidden" name="selection31" id="selection31" value="unset">
+<input type="hidden" name="selection32" id="selection32" value="unset">
+<input type="hidden" name="selection33" id="selection33" value="unset">
+<input type="hidden" name="selection34" id="selection34" value="unset">
+<input type="hidden" name="selection35" id="selection35" value="unset">
+<input type="hidden" name="selection36" id="selection36" value="unset">
+<input type="hidden" name="selection37" id="selection37" value="unset">
+<input type="hidden" name="selection38" id="selection38" value="unset">
+<input type="hidden" name="selection39" id="selection39" value="unset">
+<input type="hidden" name="selection40" id="selection40" value="unset">
+<input type="hidden" name="selection41" id="selection41" value="unset">
+<input type="hidden" name="selection42" id="selection42" value="unset">
+<input type="hidden" name="selection43" id="selection43" value="unset">
+<input type="hidden" name="selection44" id="selection44" value="unset">
+<input type="hidden" name="selection45" id="selection45" value="unset">
+<input type="hidden" name="selection46" id="selection46" value="unset">
+<input type="hidden" name="selection47" id="selection47" value="unset">
+<input type="hidden" name="selection48" id="selection48" value="unset">
+<input type="hidden" name="selection49" id="selection49" value="unset">
+<input type="hidden" name="selection50" id="selection50" value="unset">
+<input type="hidden" name="selection51" id="selection51" value="unset">
+<input type="hidden" name="selection52" id="selection52" value="unset">
+<input type="hidden" name="selection53" id="selection53" value="unset">
+<input type="hidden" name="selection54" id="selection54" value="unset">
+<input type="hidden" name="selection55" id="selection55" value="unset">
+<input type="hidden" name="selection56" id="selection56" value="unset">
+<input type="hidden" name="selection57" id="selection57" value="unset">
+<input type="hidden" name="selection58" id="selection58" value="unset">
+<input type="hidden" name="selection59" id="selection59" value="unset">
+<input type="hidden" name="selection60" id="selection60" value="unset">
+<input type="hidden" name="selection61" id="selection61" value="unset">
+<input type="hidden" name="selection62" id="selection62" value="unset">
+<input type="hidden" name="selection63" id="selection63" value="unset">
+<input type="hidden" name="selection64" id="selection64" value="unset">
+<input type="hidden" name="selection65" id="selection65" value="unset">
+<input type="hidden" name="selection66" id="selection66" value="unset">
+<input type="hidden" name="selection67" id="selection67" value="unset">
+<input type="hidden" name="selection68" id="selection68" value="unset">
+<input type="hidden" name="selection69" id="selection69" value="unset">
+<input type="hidden" name="selection70" id="selection70" value="unset">
+<input type="hidden" name="selection71" id="selection71" value="unset">
+<input type="hidden" name="selection72" id="selection72" value="unset">
+<input type="hidden" name="selection73" id="selection73" value="unset">
+<input type="hidden" name="selection74" id="selection74" value="unset">
+<input type="hidden" name="selection75" id="selection75" value="unset">
+<input type="hidden" name="selection76" id="selection76" value="unset">
+<input type="hidden" name="selection77" id="selection77" value="unset">
+<input type="hidden" name="selection78" id="selection78" value="unset">
+<input type="hidden" name="selection79" id="selection79" value="unset">
+<input type="hidden" name="selection80" id="selection80" value="unset">
+<input type="hidden" name="selection81" id="selection81" value="unset">
+<input type="hidden" name="selection82" id="selection82" value="unset">
+<input type="hidden" name="selection83" id="selection83" value="unset">
+<input type="hidden" name="selection84" id="selection84" value="unset">
+<input type="hidden" name="selection85" id="selection85" value="unset">
+<input type="hidden" name="selection86" id="selection86" value="unset">
+<input type="hidden" name="selection87" id="selection87" value="unset">
+<input type="hidden" name="selection88" id="selection88" value="unset">
+<input type="hidden" name="selection89" id="selection89" value="unset">
+<input type="hidden" name="selection90" id="selection90" value="unset">
+<input type="hidden" name="selection91" id="selection91" value="unset">
+<input type="hidden" name="selection92" id="selection92" value="unset">
+<input type="hidden" name="selection93" id="selection93" value="unset">
+<input type="hidden" name="selection94" id="selection94" value="unset">
+<input type="hidden" name="selection95" id="selection95" value="unset">
+<input type="hidden" name="selection96" id="selection96" value="unset">
+<input type="hidden" name="selection97" id="selection97" value="unset">
+<input type="hidden" name="selection98" id="selection98" value="unset">
+<input type="hidden" name="selection99" id="selection99" value="unset">
+<input type="hidden" name="selection100" id="selection100" value="unset">
+<input type="hidden" name="selection101" id="selection101" value="unset">
+<input type="hidden" name="selection102" id="selection102" value="unset">
+<input type="hidden" name="selection103" id="selection103" value="unset">
+<input type="hidden" name="selection104" id="selection104" value="unset">
+<input type="hidden" name="selection105" id="selection105" value="unset">
+<input type="hidden" name="selection106" id="selection106" value="unset">
+<input type="hidden" name="selection107" id="selection107" value="unset">
+<input type="hidden" name="selection108" id="selection108" value="unset">
+<input type="hidden" name="selection109" id="selection109" value="unset">
+<input type="hidden" name="selection110" id="selection110" value="unset">
+<input type="hidden" name="selection111" id="selection111" value="unset">
+<input type="hidden" name="selection112" id="selection112" value="unset">
+<input type="hidden" name="selection113" id="selection113" value="unset">
+<input type="hidden" name="selection114" id="selection114" value="unset">
+<input type="hidden" name="selection115" id="selection115" value="unset">
+<input type="hidden" name="selection116" id="selection116" value="unset">
+<input type="hidden" name="selection117" id="selection117" value="unset">
+<input type="hidden" name="selection118" id="selection118" value="unset">
+<input type="hidden" name="selection119" id="selection119" value="unset">
+<input type="hidden" name="selection120" id="selection120" value="unset">
+<input type="hidden" name="selection121" id="selection121" value="unset">
+<input type="hidden" name="selection122" id="selection122" value="unset">
+<input type="hidden" name="selection123" id="selection123" value="unset">
+<input type="hidden" name="selection124" id="selection124" value="unset">
+<input type="hidden" name="selection125" id="selection125" value="unset">
+<input type="hidden" name="selection126" id="selection126" value="unset">
+<input type="hidden" name="selection127" id="selection127" value="unset">
+<input type="hidden" name="selection128" id="selection128" value="unset">
+<input type="hidden" name="selection129" id="selection129" value="unset">
+<input type="hidden" name="selection130" id="selection130" value="unset">
+<input type="hidden" name="selection131" id="selection131" value="unset">
+<input type="hidden" name="selection132" id="selection132" value="unset">
+<input type="hidden" name="selection133" id="selection133" value="unset">
+<input type="hidden" name="selection134" id="selection134" value="unset">
+<input type="hidden" name="selection135" id="selection135" value="unset">
+<input type="hidden" name="selection136" id="selection136" value="unset">
+<input type="hidden" name="selection137" id="selection137" value="unset">
+<input type="hidden" name="selection138" id="selection138" value="unset">
+<input type="hidden" name="selection139" id="selection139" value="unset">
+<input type="hidden" name="selection140" id="selection140" value="unset">
+<input type="hidden" name="selection141" id="selection141" value="unset">
+<input type="hidden" name="selection142" id="selection142" value="unset">
+<input type="hidden" name="selection143" id="selection143" value="unset">
+<input type="hidden" name="selection144" id="selection144" value="unset">
+<input type="hidden" name="selection145" id="selection145" value="unset">
+<input type="hidden" name="selection146" id="selection146" value="unset">
+<input type="hidden" name="selection147" id="selection147" value="unset">
+<input type="hidden" name="selection148" id="selection148" value="unset">
+<input type="hidden" name="selection149" id="selection149" value="unset">
+<input type="hidden" name="selection150" id="selection150" value="unset">
+<input type="hidden" name="selection151" id="selection151" value="unset">
+<input type="hidden" name="selection152" id="selection152" value="unset">
+<input type="hidden" name="selection153" id="selection153" value="unset">
+<input type="hidden" name="selection154" id="selection154" value="unset">
+<input type="hidden" name="selection155" id="selection155" value="unset">
+<input type="hidden" name="selection156" id="selection156" value="unset">
+<input type="hidden" name="selection157" id="selection157" value="unset">
+<input type="hidden" name="selection158" id="selection158" value="unset">
+<input type="hidden" name="selection159" id="selection159" value="unset">
+<input type="hidden" name="selection160" id="selection160" value="unset">
+<input type="hidden" name="selection161" id="selection161" value="unset">
+<input type="hidden" name="selection162" id="selection162" value="unset">
+<input type="hidden" name="selection163" id="selection163" value="unset">
+<input type="hidden" name="selection164" id="selection164" value="unset">
+<input type="hidden" name="selection165" id="selection165" value="unset">
+<input type="hidden" name="selection166" id="selection166" value="unset">
+<input type="hidden" name="selection167" id="selection167" value="unset">
+<input type="hidden" name="selection168" id="selection168" value="unset">
+<input type="hidden" name="selection169" id="selection169" value="unset">
+<input type="hidden" name="selection170" id="selection170" value="unset">
+<input type="hidden" name="selection171" id="selection171" value="unset">
+<input type="hidden" name="selection172" id="selection172" value="unset">
+<input type="hidden" name="selection173" id="selection173" value="unset">
+<input type="hidden" name="selection174" id="selection174" value="unset">
+<input type="hidden" name="selection175" id="selection175" value="unset">
+<input type="hidden" name="selection176" id="selection176" value="unset">
+<input type="hidden" name="selection177" id="selection177" value="unset">
+<input type="hidden" name="selection178" id="selection178" value="unset">
+<input type="hidden" name="selection179" id="selection179" value="unset">
+<input type="hidden" name="selection180" id="selection180" value="unset">
+<input type="hidden" name="selection181" id="selection181" value="unset">
+<input type="hidden" name="selection182" id="selection182" value="unset">
+<input type="hidden" name="selection183" id="selection183" value="unset">
+<input type="hidden" name="selection184" id="selection184" value="unset">
+<input type="hidden" name="selection185" id="selection185" value="unset">
+<input type="hidden" name="selection186" id="selection186" value="unset">
+<input type="hidden" name="selection187" id="selection187" value="unset">
+<input type="hidden" name="selection188" id="selection188" value="unset">
+<input type="hidden" name="selection189" id="selection189" value="unset">
+<input type="hidden" name="selection190" id="selection190" value="unset">
+<input type="hidden" name="selection191" id="selection191" value="unset">
+<input type="hidden" name="selection192" id="selection192" value="unset">
+<input type="hidden" name="selection193" id="selection193" value="unset">
+<input type="hidden" name="selection194" id="selection194" value="unset">
+<input type="hidden" name="selection195" id="selection195" value="unset">
+<input type="hidden" name="selection196" id="selection196" value="unset">
+<input type="hidden" name="selection197" id="selection197" value="unset">
+<input type="hidden" name="selection198" id="selection198" value="unset">
+<input type="hidden" name="selection199" id="selection199" value="unset">
+<input type="hidden" name="selection200" id="selection200" value="unset">
+<input type="hidden" name="selection201" id="selection201" value="unset">
+<input type="hidden" name="selection202" id="selection202" value="unset">
+<input type="hidden" name="selection203" id="selection203" value="unset">
+<input type="hidden" name="selection204" id="selection204" value="unset">
+<input type="hidden" name="selection205" id="selection205" value="unset">
+<input type="hidden" name="selection206" id="selection206" value="unset">
+<input type="hidden" name="selection207" id="selection207" value="unset">
+<input type="hidden" name="selection208" id="selection208" value="unset">
+<input type="hidden" name="selection209" id="selection209" value="unset">
+<input type="hidden" name="selection210" id="selection210" value="unset">
+<input type="hidden" name="selection211" id="selection211" value="unset">
+<input type="hidden" name="selection212" id="selection212" value="unset">
+<input type="hidden" name="selection213" id="selection213" value="unset">
+<input type="hidden" name="selection214" id="selection214" value="unset">
+<input type="hidden" name="selection215" id="selection215" value="unset">
+<input type="hidden" name="selection216" id="selection216" value="unset">
+<input type="hidden" name="selection217" id="selection217" value="unset">
+<input type="hidden" name="selection218" id="selection218" value="unset">
+<input type="hidden" name="selection219" id="selection219" value="unset">
+<input type="hidden" name="selection220" id="selection220" value="unset">
+<input type="hidden" name="selection221" id="selection221" value="unset">
+<input type="hidden" name="selection222" id="selection222" value="unset">
+<input type="hidden" name="selection223" id="selection223" value="unset">
+<input type="hidden" name="selection224" id="selection224" value="unset">
+<input type="hidden" name="selection225" id="selection225" value="unset">
+<input type="hidden" name="selection226" id="selection226" value="unset">
+<input type="hidden" name="selection227" id="selection227" value="unset">
+<input type="hidden" name="selection228" id="selection228" value="unset">
+<input type="hidden" name="selection229" id="selection229" value="unset">
+<input type="hidden" name="selection230" id="selection230" value="unset">
+<input type="hidden" name="selection231" id="selection231" value="unset">
+<input type="hidden" name="selection232" id="selection232" value="unset">
+<input type="hidden" name="selection233" id="selection233" value="unset">
+<input type="hidden" name="selection234" id="selection234" value="unset">
+<input type="hidden" name="selection235" id="selection235" value="unset">
+<input type="hidden" name="selection236" id="selection236" value="unset">
+<input type="hidden" name="selection237" id="selection237" value="unset">
+<input type="hidden" name="selection238" id="selection238" value="unset">
+<input type="hidden" name="selection239" id="selection239" value="unset">
+<input type="hidden" name="selection240" id="selection240" value="unset">
+<input type="hidden" name="selection241" id="selection241" value="unset">
+<input type="hidden" name="selection242" id="selection242" value="unset">
+<input type="hidden" name="selection243" id="selection243" value="unset">
+<input type="hidden" name="selection244" id="selection244" value="unset">
+<input type="hidden" name="selection245" id="selection245" value="unset">
+<input type="hidden" name="selection246" id="selection246" value="unset">
+<input type="hidden" name="selection247" id="selection247" value="unset">
+<input type="hidden" name="selection248" id="selection248" value="unset">
+<input type="hidden" name="selection249" id="selection249" value="unset">
+<input type="hidden" name="selection250" id="selection250" value="unset">
+<input type="hidden" name="selection251" id="selection251" value="unset">
+<input type="hidden" name="selection252" id="selection252" value="unset">
+<input type="hidden" name="selection253" id="selection253" value="unset">
+<input type="hidden" name="selection254" id="selection254" value="unset">
+<input type="hidden" name="selection255" id="selection255" value="unset">
+<input type="hidden" name="selection256" id="selection256" value="unset">
+<input type="hidden" name="selection257" id="selection257" value="unset">
+<input type="hidden" name="selection258" id="selection258" value="unset">
+<input type="hidden" name="selection259" id="selection259" value="unset">
+<input type="hidden" name="selection260" id="selection260" value="unset">
+<input type="hidden" name="selection261" id="selection261" value="unset">
+<input type="hidden" name="selection262" id="selection262" value="unset">
+<input type="hidden" name="selection263" id="selection263" value="unset">
+<input type="hidden" name="selection264" id="selection264" value="unset">
+<input type="hidden" name="selection265" id="selection265" value="unset">
+
+<input type="hidden" name="lat" id="lat" value="unset">
+<input type="hidden" name="lon" id="lon" value="unset">
+
+
+</body>
+
+
+</html>

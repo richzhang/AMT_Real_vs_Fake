@@ -1,7 +1,0 @@
-Sentinel scores: 100.0, 94.7
-Removing [0/2] Turkers with scores []
-Needed: 1 
-Done: [1 1]
-Not Done: [0 0]
-Writing ./results2.csv ==> results2_pass2.csv
-Writing ./highlevel_mit5k_64_set2_rem3_rem2.csv ==> highlevel_mit5k_64_set2_rem3_rem2_rem0.csv
