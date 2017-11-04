@@ -1,0 +1,8 @@
+Sentinel scores: 100.0, 100.0, 100.0, 100.0, 100.0, 86.7, 100.0, 100.0, 100.0
+Removing [1/9] Turkers with scores [86.7]
+Needed: 5 
+Done: [0 2 3 1 0 2 0 0]
+Not Done: [5 3 2 4 5 3 5 5]
+Writing ./results0f.csv ==> results0f_pass.csv
+Writing ./results0f.csv ==> results0f_fail.csv
+Writing ./super_div2k_img50.csv ==> super_div2k_img50_results0f_rem32.csv
